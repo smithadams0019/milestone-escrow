@@ -1,0 +1,154 @@
+{
+ "inspection": {
+  "id": "INSP-8CEA029A",
+  "n": 1,
+  "at": "2026-10-02T02:12:07.664Z",
+  "inspector": {
+   "name": "R. Anselm",
+   "licence": "NC-CI-20418"
+  },
+  "signedOff": true,
+  "verdict": {
+   "decision": "MET",
+   "confidence": 1,
+   "checklist": [
+    {
+     "requirement": "Footing depth and reinforcing steel inspected and passed",
+     "status": "PASS",
+     "evidence": "Footing depth and rebar: PASS (24 in. below grade, #4 bar at 12 in. o.c.)"
+    },
+    {
+     "requirement": "Termite pre-treatment and vapour barrier in place before the pour",
+     "status": "PASS",
+     "evidence": "Termite pre-treatment and 10-mil vapour barrier: PASS, verified before pour"
+    },
+    {
+     "requirement": "Slab concrete strength test result meets the specified minimum",
+     "status": "PASS",
+     "evidence": "Slab concrete: 28-day cylinder breaks averaged 3,850 psi against a 3,000 psi specification: PASS"
+    },
+    {
+     "requirement": "Finished floor elevation at or above the flood-elevation requirement for the lot",
+     "status": "PASS",
+     "evidence": "Finished floor elevation: 2.0 ft above base flood elevation (elevation certificate attached): PASS"
+    }
+   ],
+   "summary": "All foundation and slab requirements have been inspected and passed by licensed inspector R. Anselm. Payment of $18,000 will be released to Marlowe & Daughters General Contracting ($3,000) and Pinehurst Footing & Slab ($15,000).",
+   "inspector_signoff_found": true,
+   "anomalies": [],
+   "releaseBlocked": false,
+   "reasons": [],
+   "modelId": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+   "usage": {
+    "inputTokens": 7840,
+    "outputTokens": 946
+   }
+  },
+  "agent": {
+   "outcome": "released",
+   "turns": 3,
+   "trace": [
+    {
+     "turn": 1,
+     "tool": "read_inspection_report",
+     "input": "",
+     "output": "{\"untrusted_inspection_report\":\"ROBESON COUNTY BUILDING INSPECTIONS - FOUNDATION REPORT\\nPermit BP-2026-04417 | Whitfield residence | Date: 14 Aug 2026\\n1. Footing depth and rebar: PASS (24 in. below grade, #4 bar at 12 in. o.c.).\\n2. Termite pre-treatment and…",
+     "status": "success",
+     "ms": 0
+    },
+    {
+     "turn": 1,
+     "tool": "get_milestone_criteria",
+     "input": "",
+     "output": "{\"milestone\":1,\"title\":\"Foundation and slab\",\"inspection_required\":\"Footing, vapour barrier and slab inspection\",\"requirements\":[\"Footing depth and reinforcing steel inspected and passed\",\"Termite pre-treatment and vapour barrier in place before the pour\",\"Sla…",
+     "status": "success",
+     "ms": 0
+    },
+    {
+     "turn": 1,
+     "tool": "get_payment_tree",
+     "input": "",
+     "output": "{\"milestone_total_usd\":18000,\"payees\":[{\"payee_id\":\"gc\",\"name\":\"Marlowe & Daughters General Contracting\",\"role\":\"general contractor\",\"trade\":\"General contractor\",\"owed_usd\":3000,\"payout_address_valid\":true},{\"payee_id\":\"concrete\",\"name\":\"Pinehurst Footing & Sl…",
+     "status": "success",
+     "ms": 0
+    },
+    {
+     "turn": 1,
+     "tool": "get_escrow_position",
+     "input": "",
+     "output": "{\"held_in_escrow_usd\":120000,\"this_milestone_usd\":18000,\"sufficient\":true,\"already_released_usd\":0,\"earlier_milestones_released\":true}",
+     "status": "success",
+     "ms": 0
+    },
+    {
+     "turn": 2,
+     "tool": "compose_payout_batch",
+     "input": "",
+     "output": "{\"ok\":true,\"items\":[{\"payee_id\":\"gc\",\"usd_ledger\":3000,\"usd_sandbox\":3000},{\"payee_id\":\"concrete\",\"usd_ledger\":15000,\"usd_sandbox\":15000}],\"item_count\":2,\"single_batch\":true}",
+     "status": "success",
+     "ms": 1
+    },
+    {
+     "turn": 3,
+     "tool": "release_milestone",
+     "input": "{\"decision\":\"MET\",\"confidence\":1}",
+     "output": "{\"released\":true,\"batch_id\":\"3UA36U2DS3626\",\"items\":2}",
+     "status": "success",
+     "ms": 4956
+    }
+   ],
+   "refusedAttempt": null
+  },
+  "report": "ROBESON COUNTY BUILDING INSPECTIONS - FOUNDATION REPORT\nPermit BP-2026-04417 | Whitfield residence | Date: 14 Aug 2026\n1. Footing depth and rebar: PASS (24 in. below grade, #4 bar at 12 in. o.c.).\n2. Termite pre-treatment and 10-mil vapour barrier: PASS, verified before pour.\n3. Slab concrete: 28-day cylinder breaks averaged 3,850 psi against a 3,000 psi specification: PASS.\n4. Finished floor elevation: 2.0 ft above base flood elevation (elevation certificate attached): PASS.\nOpen corrections: none. Inspector sign-off: R. Anselm, licence NC-CI-20418, signed 14 Aug 2026."
+ },
+ "batch": {
+  "id": "3UA36U2DS3626",
+  "senderBatchId": "esc-5c78dd-m1",
+  "requestId": "esc-5c78dd-m1",
+  "adopted": false,
+  "divisor": 1,
+  "milestone": 1,
+  "createdAt": "2026-10-02T02:13:28.303Z",
+  "status": "PROCESSING",
+  "inspectionId": "INSP-8CEA029A",
+  "invoiceId": "INV2-JT5A-FNDE-2NQ2-Y9FH",
+  "invoiceError": null,
+  "items": [
+   {
+    "payeeId": "gc",
+    "receiver": "gc.escrow-demo@example.com",
+    "ledgerCents": 300000,
+    "sandboxCents": 300000,
+    "senderItemId": "whitfield-5c78dd-m1-gc",
+    "status": "UNCLAIMED",
+    "itemId": "3QC9F4ZRNMA64",
+    "error": {
+     "name": "RECEIVER_UNREGISTERED",
+     "message": "The recipient for this payout does not have an account. A link to sign up for an account was sent to the recipient. However, if the recipient does not claim this payout within 30 days, the funds will be returned to your account."
+    },
+    "transactionId": "24V87448EP269711N",
+    "processedAt": "2026-10-02T02:13:51Z",
+    "firstSeenUnclaimed": "2026-10-02T02:13:57.407Z"
+   },
+   {
+    "payeeId": "concrete",
+    "receiver": "concrete.escrow-demo@example.com",
+    "ledgerCents": 1500000,
+    "sandboxCents": 1500000,
+    "senderItemId": "whitfield-5c78dd-m1-concrete",
+    "status": "UNCLAIMED",
+    "itemId": "7Y3RKBN8PDTYW",
+    "error": {
+     "name": "RECEIVER_UNREGISTERED",
+     "message": "The recipient for this payout does not have an account. A link to sign up for an account was sent to the recipient. However, if the recipient does not claim this payout within 30 days, the funds will be returned to your account."
+    },
+    "transactionId": "7U15758714727132J",
+    "processedAt": "2026-10-02T02:13:51Z",
+    "firstSeenUnclaimed": "2026-10-02T02:13:57.407Z"
+   }
+  ],
+  "fees": "28.00",
+  "timeCompleted": null,
+  "refreshedAt": "2026-10-02T02:13:57.407Z"
+ }
+}

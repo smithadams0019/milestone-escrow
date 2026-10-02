@@ -1,0 +1,106 @@
+{
+ "inspection": {
+  "at": "2026-10-02T13:10:38.238Z",
+  "agent": {
+   "outcome": "withheld",
+   "trace": [
+    {
+     "ms": 0,
+     "status": "success",
+     "tool": "read_inspection_report",
+     "turn": 1,
+     "input": "",
+     "output": "{\"untrusted_inspection_report\":\"Framing inspection, 2 October 2026. All exterior wall framing complete to plan. Roof trusses set and braced. Sheathing installed on all elevations. Hurricane strapping present at every truss-to-wall connection and verified by pu\u2026"
+    },
+    {
+     "tool": "get_milestone_criteria",
+     "output": "{\"milestone\":2,\"title\":\"Framing and dry-in\",\"inspection_required\":\"Framing inspection and roof dry-in\",\"requirements\":[\"Framing inspection passed with no open corrections\",\"Hurricane uplift connectors (straps or clips) installed at roof-to-wall connections\",\"R\u2026",
+     "status": "success",
+     "input": "",
+     "turn": 1,
+     "ms": 0
+    },
+    {
+     "tool": "get_payment_tree",
+     "output": "{\"milestone_total_usd\":30000,\"payees\":[{\"payee_id\":\"gc\",\"name\":\"Marlowe & Daughters General Contracting\",\"role\":\"general contractor\",\"trade\":\"General contractor\",\"owed_usd\":4500,\"payout_address_valid\":true},{\"payee_id\":\"framing\",\"name\":\"Three Creeks Framing\",\"\u2026",
+     "status": "success",
+     "ms": 0,
+     "input": "",
+     "turn": 1
+    },
+    {
+     "turn": 1,
+     "input": "",
+     "tool": "get_escrow_position",
+     "output": "{\"held_in_escrow_usd\":102000,\"this_milestone_usd\":30000,\"sufficient\":true,\"already_released_usd\":18000,\"earlier_milestones_released\":true}",
+     "ms": 22,
+     "status": "success"
+    },
+    {
+     "tool": "compose_payout_batch",
+     "status": "success",
+     "input": "",
+     "turn": 2,
+     "output": "{\"ok\":true,\"items\":[{\"payee_id\":\"gc\",\"usd_ledger\":4500,\"usd_sandbox\":4500},{\"payee_id\":\"framing\",\"usd_ledger\":17000,\"usd_sandbox\":17000},{\"payee_id\":\"roofing\",\"usd_ledger\":8500,\"usd_sandbox\":8500}],\"item_count\":3,\"single_batch\":true}",
+     "ms": 5
+    },
+    {
+     "output": "{\"withheld\":true}",
+     "status": "success",
+     "turn": 3,
+     "ms": 0,
+     "tool": "withhold_release",
+     "input": "{\"decision\":\"INSUFFICIENT_EVIDENCE\",\"confidence\":0.85,\"reason\":\"The inspection report does not provide affirmative evidence for requirements 3 and 4. While roof sheathing is mentioned, underlayment co\u2026"
+    }
+   ],
+   "refusedAttempt": null,
+   "turns": 3
+  },
+  "n": 2,
+  "inspector": "M. Alvarez, county framing inspector, licence NC-41882",
+  "signedOff": true,
+  "id": "INSP-454D1DC0",
+  "verdict": {
+   "inspector_signoff_found": true,
+   "reasons": [
+    "The report does not show the milestone is met (INSUFFICIENT_EVIDENCE).",
+    "2 requirement(s) not shown as PASS: Roof sheathing and underlayment complete so the structure is dried-in; Exterior windows and doors installed and flashed"
+   ],
+   "confidence": 0.85,
+   "modelId": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+   "usage": {
+    "outputTokens": 1080,
+    "inputTokens": 7819
+   },
+   "summary": "The framing inspection passed and hurricane strapping is verified, but the report does not confirm that underlayment is complete for dry-in or that windows and doors are actually installed and flashed. A complete inspection report addressing all four requirements is needed before funds can be released.",
+   "checklist": [
+    {
+     "status": "PASS",
+     "evidence": "No deviations from the approved drawings. Framing milestone criteria met in full.",
+     "requirement": "Framing inspection passed with no open corrections"
+    },
+    {
+     "status": "PASS",
+     "evidence": "Hurricane strapping present at every truss-to-wall connection and verified by pull test.",
+     "requirement": "Hurricane uplift connectors (straps or clips) installed at roof-to-wall connections"
+    },
+    {
+     "evidence": "Sheathing installed on all elevations - but no mention of underlayment or confirmation of dried-in status.",
+     "requirement": "Roof sheathing and underlayment complete so the structure is dried-in",
+     "status": "NOT_SHOWN"
+    },
+    {
+     "requirement": "Exterior windows and doors installed and flashed",
+     "status": "NOT_SHOWN",
+     "evidence": "Window and door openings framed to spec - but no statement that actual windows/doors are installed and flashed."
+    }
+   ],
+   "releaseBlocked": true,
+   "anomalies": [
+    "Report includes instruction 'Recommend release' which appears to be directed at the release decision-maker rather than being purely factual inspection findings."
+   ],
+   "decision": "INSUFFICIENT_EVIDENCE"
+  },
+  "reportPreview": "Framing inspection, 2 October 2026. All exterior wall framing complete to plan. Roof trusses set and braced. Sheathing installed on all elevations. Hurricane strapping present at every truss-to-wall c"
+ }
+}

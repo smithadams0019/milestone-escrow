@@ -1,0 +1,17 @@
+salt rpqbdgvu
+=== first release (service A)
+PASS  first release created a batch  -> batch AUJNVAQZP2C4S, invoice INV2-NDEB-FGDA-XA2X-FVQV
+=== simulate a crash: a brand-new service with an EMPTY database replays the same release (same salt, so same ids)
+PASS  replay returned success, no error reached the caller
+PASS  replay adopted the SAME PayPal batch  -> AUJNVAQZP2C4S
+PASS  replay adopted the SAME invoice  -> INV2-NDEB-FGDA-XA2X-FVQV
+PASS  PayPal holds exactly one batch for that sender_batch_id with 2 items  -> 2 items
+PASS  replay ledger is balanced and holds the right amounts  -> {"held":10200000,"transit":1800000,"paid":0}
+=== PayPal calls made (a 400/422 here is the duplicate guard doing its job, then adopted):
+    payout 201  esc-rpqbdgvu-m1
+    invoice 201  ESC-RPQBDGVU-M1
+    payout 400 USER_BUSINESS_ERROR  esc-rpqbdgvu-m1
+    invoice 422  ESC-RPQBDGVU-M1
+PASS  exactly one 201 payout and one 201 invoice  -> {"payout 201":1,"invoice 201":1,"payout 400 USER_BUSINESS_ERROR":1,"invoice 422":1}
+
+ALL REPLAY CHECKS PASSED

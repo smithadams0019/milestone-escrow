@@ -1,0 +1,16 @@
+
+=== 1. Reachability
+PASS  Function URL /api/health  -> 200 in 2812 ms  https://oop7bwgirxxofwjyi67b2auk2q0ghwbv.lambda-url.us-east-1.on.aws
+PASS  CloudFront serves the app  -> 200 https://d9zf4cgc4ktxw.cloudfront.net
+PASS  CloudFront serves the JS bundle  -> 200 assets/index-FoT5_-H5.js
+PASS  SPA fallback (unknown path returns the app)  -> 200
+PASS  bundle points at the Function URL
+PASS  CORS preflight allowed from the CloudFront origin  -> 200 https://d9zf4cgc4ktxw.cloudfront.net
+
+=== 2. Reset and initial state
+PASS  reset  -> 2017 ms
+PASS  milestone 1 released from the real reference batch, milestone 2 awaiting
+PASS  ledger balanced; held $102,000 of $120,000  -> {"fundedCents":12000000,"committedCents":1800000,"deliveredCents":0,"transitCents":1800000,"remainingCents":10200000}
+
+=== 3. Agent REFUSES: inspection failed
+   attempt 1: 502 AGENT_ERROR after 100627 ms (The review agent failed, so nothing was released: Too many requests, please wait before tr). Nothing was released. Retrying.

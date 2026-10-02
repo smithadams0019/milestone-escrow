@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+.recipients.json
+.deploy-state.json
+*.zip
+
+# QA screenshots from the build rounds — not part of the project
+screenshots/
+shots/
+.shots/
+evidence/

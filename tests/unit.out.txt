@@ -1,0 +1,49 @@
+
+> escrow-backend@1.0.0 test
+> node --test test/unit.test.mjs
+
+✔ seed: every milestone split sums to its total and the programme totals $120,000 (1.430837ms)
+✔ sandbox scale is 1:2500 and every seeded amount scales to whole cents (0.158239ms)
+✔ planRelease rejects a bad receiver, a split mismatch, a tiny amount and an over-cap amount (1.268433ms)
+✔ payout body: one batch, GC and four subs, EMAIL recipients, 2dp strings, deterministic item ids (0.520734ms)
+✔ isEmail (0.092489ms)
+✔ rollup: a batch of UNCLAIMED items is not delivered (0.15329ms)
+✔ gate: blocks without sign-off, on FAIL, on low confidence, on missing licence (0.249205ms)
+✔ happy path: signed-off inspection releases GC + four subs in ONE PayPal call (11.517935ms)
+✔ milestones release in order (0.34169ms)
+✔ a failed inspection moves no money, and the milestone stays open for re-inspection (1.179561ms)
+✔ unsigned submission is held even if the model says MET (0.569003ms)
+✔ AGENT REFUSAL: a model that tries to release while one requirement is FAIL is stopped by the rules gate; no payout is made (0.461779ms)
+✔ AGENT REFUSAL: a report with no named licensed sign-off cannot release (0.443538ms)
+✔ AGENT: if the model never decides, the default is to withhold (0.37155ms)
+✔ AGENT: the real loop runs tools first (4 reads) before any decision (0.67592ms)
+✔ double release: two concurrent inspections of the same milestone create exactly one PayPal batch (0.951728ms)
+✔ PayPal refusal (INSUFFICIENT_FUNDS) un-locks the milestone, pays nobody, and is reported (0.68226ms)
+✔ an invalid recipient is caught before PayPal is called, and the milestone stays in escrow (0.516288ms)
+✔ partial failure: one of five items fails, four deliver; milestone is released but flagged (2.674644ms)
+✔ unclaimed -> cancel -> reissue to a corrected address makes exactly one new payment (1.654633ms)
+✔ cancel refuses anything that is not UNCLAIMED (0.756894ms)
+✔ webhook is a nudge: an unverified event cannot change state by itself, it only triggers a re-read (1.364198ms)
+✔ reset returns to a clean ledger with a new run number (0.844573ms)
+✔ sample reports exist for the demo milestone, including the adversarial one (0.061975ms)
+✔ with the reference run enabled, a fresh project starts with milestone 1 already released from a real batch (9.405351ms)
+✔ LEDGER: every release is balanced; held + in transit + paid always equals funded (1.578056ms)
+✔ LEDGER: unclaimed money stays in transit, and a returned payment moves back to escrow as a new balanced entry (1.165909ms)
+✔ LEDGER: syncing the same PayPal state twice posts nothing twice (replay-safe) (0.979645ms)
+✔ LEDGER: a PayPal failure after landing is reversed, not lost (0.93287ms)
+✔ RECONCILE: clean when ledger and PayPal agree; drift is reported when they do not (1.668636ms)
+✔ LEDGER: an unbalanced entry is refused at the door (0.133284ms)
+✔ IDEMPOTENCY: every payout and invoice carries a PayPal-Request-Id equal to the deterministic sender_batch_id (0.751988ms)
+✔ IDEMPOTENCY: crash between PayPal accepting the batch and us recording it - the retry ADOPTS the existing batch and pays nobody twice (1.141295ms)
+✔ RETRY: re-issue is refused while the old payment could still land (pending/success) (0.647639ms)
+✔ RETRY: a double-click on re-issue cannot pay twice (same derived sender_batch_id) (1.08709ms)
+✔ WEBHOOK: with a webhook id configured, an event whose signature does not verify is rejected 401 and changes nothing (1.137524ms)
+✔ IDEMPOTENCY: adopting an existing batch is refused when its recipients or amounts differ (id collision) (0.747429ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2687.14394

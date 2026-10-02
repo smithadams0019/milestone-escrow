@@ -1,0 +1,18 @@
+{
+  "name": "escrow-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/unit.test.mjs",
+    "local": "node src/local.mjs"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1145.0",
+    "@aws-sdk/client-dynamodb": "^3.1145.0",
+    "@aws-sdk/client-lambda": "^3.1145.0",
+    "@aws-sdk/client-ssm": "^3.1145.0",
+    "@aws-sdk/lib-dynamodb": "^3.1145.0"
+  }
+}

@@ -1,0 +1,36 @@
+light PASS 14.09:1 (need 4.5)  ink #1c2420 on page #f5f1e8  - body text on page
+light PASS 15.35:1 (need 4.5)  ink #1c2420 on card #fdfbf6  - body text on cards
+light PASS  6.37:1 (need 4.5)  ink2 #4f5a54 on page #f5f1e8  - secondary text on page
+light PASS  6.95:1 (need 4.5)  ink2 #4f5a54 on card #fdfbf6  - secondary text on cards
+light PASS  5.77:1 (need 4.5)  ink2 #4f5a54 on band #ece6d6  - secondary text on grid group bands
+light PASS  8.54:1 (need 4.5)  ok-fg #174a2e on ok-bg #e1eee4  - landed cell text
+light PASS  6.45:1 (need 4.5)  warn-fg #7d4a08 on warn-bg #fbefd5  - moving / unclaimed cell text
+light PASS  6.13:1 (need 4.5)  bad-fg #8a352c on bad-bg #f5dcd7  - blocked / failed cell text
+light PASS  6.37:1 (need 4.5)  idle-fg #575f5a on card #fdfbf6  - awaiting inspection cell text
+light PASS  9.88:1 (need 4.5)  ok-fg #174a2e on card #fdfbf6  - green text on card
+light PASS  7.11:1 (need 4.5)  warn-fg #7d4a08 on card #fdfbf6  - amber text on card
+light PASS  7.73:1 (need 4.5)  bad-fg #8a352c on card #fdfbf6  - red text on card
+light PASS  8.13:1 (need 4.5)  on-accent #ffffff on accent #1f5a3a  - button text on accent
+light PASS  6.41:1 (need 4.5)  nav-fg #d9e8de on nav-bg #1f5a3a  - navigation text
+light PASS  8.13:1 (need 4.5)  nav-fg-on #ffffff on nav-bg #1f5a3a  - active navigation text
+light PASS  7.87:1 (need 3)  accent #1f5a3a on card #fdfbf6  - focus ring / non-text accent vs card (3:1)
+light PASS  3.34:1 (need 3)  line-strong #858c82 on card #fdfbf6  - input and cell borders (3:1)
+dark  PASS 15.33:1 (need 4.5)  ink #e8ebe5 on page #101512  - body text on page
+dark  PASS 14.10:1 (need 4.5)  ink #e8ebe5 on card #171e1a  - body text on cards
+dark  PASS  8.54:1 (need 4.5)  ink2 #a9b3ab on page #101512  - secondary text on page
+dark  PASS  7.86:1 (need 4.5)  ink2 #a9b3ab on card #171e1a  - secondary text on cards
+dark  PASS  6.95:1 (need 4.5)  ink2 #a9b3ab on band #1f2923  - secondary text on grid group bands
+dark  PASS  8.09:1 (need 4.5)  ok-fg #9bd9b2 on ok-bg #1b3626  - landed cell text
+dark  PASS  8.95:1 (need 4.5)  warn-fg #f0c477 on warn-bg #33270f  - moving / unclaimed cell text
+dark  PASS  8.20:1 (need 4.5)  bad-fg #f4aca3 on bad-bg #3b1d19  - blocked / failed cell text
+dark  PASS  7.88:1 (need 4.5)  idle-fg #aab3ac on card #171e1a  - awaiting inspection cell text
+dark  PASS 10.48:1 (need 4.5)  ok-fg #9bd9b2 on card #171e1a  - green text on card
+dark  PASS 10.40:1 (need 4.5)  warn-fg #f0c477 on card #171e1a  - amber text on card
+dark  PASS  9.12:1 (need 4.5)  bad-fg #f4aca3 on card #171e1a  - red text on card
+dark  PASS  7.57:1 (need 4.5)  on-accent #08130c on accent #5db582  - button text on accent
+dark  PASS  8.18:1 (need 4.5)  nav-fg #bcd5c4 on nav-bg #0c3a22  - navigation text
+dark  PASS 12.77:1 (need 4.5)  nav-fg-on #ffffff on nav-bg #0c3a22  - active navigation text
+dark  PASS  6.79:1 (need 3)  accent #5db582 on card #171e1a  - focus ring / non-text accent vs card (3:1)
+dark  PASS  3.93:1 (need 3)  line-strong #6f7d73 on card #171e1a  - input and cell borders (3:1)
+
+All pairs meet WCAG AA (4.5:1 text, 3:1 non-text)

@@ -1,0 +1,68 @@
+
+=== 0. Live OpenAPI spec (https://developer.paypal.com/api/payments.payouts-batch/v1/schema.json) ===
+   info.version            : 1.9
+   payout_item_request_list: minItems 1 maxItems 15000
+   recipient_enum (schema) : ["EMAIL","PHONE","PAYPAL_ID"]
+   item recipient_type prose mentions USER_HANDLE: true | mentions VENMO_HANDLE: false
+   spec states a per-item $ cap?: NO - the spec does not state a per-item dollar cap
+PASS  spec batch cap is 15000
+PASS  schema enum has exactly EMAIL, PHONE, PAYPAL_ID
+PASS  request-prose lists a 4th value USER_HANDLE (enum does not)
+
+=== 1. HEADLINE: one batch pays the general contractor and four subcontractors (milestone 3 at 1:500) ===
+   request items: 5 | sum $74.00
+   created batch 59J67C8DRXYE8 status PENDING
+PASS  one POST created one batch
+   poll  1 t+2s batch=PENDING items=[PENDING]
+   poll  2 t+7s batch=PENDING items=[PENDING]
+   poll  3 t+11s batch=PENDING items=[PENDING]
+   poll  4 t+15s batch=PENDING items=[PENDING]
+   poll  5 t+20s batch=PROCESSING items=[PENDING]
+   poll  6 t+25s batch=PROCESSING items=[PENDING,UNCLAIMED]
+   poll  7 t+29s batch=PROCESSING items=[UNCLAIMED]
+   poll  8 t+34s batch=SUCCESS items=[UNCLAIMED]
+   batch_header: {"id":"59J67C8DRXYE8","status":"SUCCESS","amount":{"currency":"USD","value":"74.00"},"fees":{"currency":"USD","value":"1.48"},"funding":"BALANCE"}
+   whitfield-r1-m3-gc                 gc.muqaaxqa@example.com                $ 10.00  UNCLAIMED  RECEIVER_UNREGISTERED
+   whitfield-r1-m3-electric           electric.muqaaxqa@example.com          $ 21.00  UNCLAIMED  RECEIVER_UNREGISTERED
+   whitfield-r1-m3-plumbing           plumbing.muqaaxqa@example.com          $ 18.00  UNCLAIMED  RECEIVER_UNREGISTERED
+   whitfield-r1-m3-hvac               hvac.muqaaxqa@example.com              $ 16.00  UNCLAIMED  RECEIVER_UNREGISTERED
+   whitfield-r1-m3-insulation         insulation.muqaaxqa@example.com        $  9.00  UNCLAIMED  RECEIVER_UNREGISTERED
+PASS  batch has 5 items
+PASS  batch reached a terminal status  -> SUCCESS
+PASS  every item left PENDING (all 5 have a settled status)
+   NOTE: 0/5 SUCCESS; the others are UNCLAIMED/RECEIVER_UNREGISTERED.
+   NOTE: batch_status says SUCCESS but items delivered = 0 - batch status is NOT delivery.
+PASS  rollup() agrees with the raw items  -> {"total":5,"delivered":0,"unclaimed":5,"failed":0,"inflight":0,"settled":true,"allDelivered":false,"needsAttention":true}
+PASS  GET /payouts-item/{id} returns the same item  -> J55NMQ3JRB3Q4 UNCLAIMED
+
+=== 2. Duplicate sender_batch_id is rejected (PayPal 30-day idempotency) ===
+PASS  duplicate batch rejected  -> 400 USER_BUSINESS_ERROR: create payout: 400 USER_BUSINESS_ERROR User business error.
+
+=== 3. Invalid recipient: whole batch refused, nothing created ===
+PASS  invalid recipient rejected with VALIDATION_ERROR  -> 400 [{"field":"items[2].receiver","location":"body","issue":"Receiver is invalid or does not match with type"}]
+
+=== 4. Escrow underfunded: INSUFFICIENT_FUNDS ===
+PASS  over-balance payout rejected with INSUFFICIENT_FUNDS  -> 422 INSUFFICIENT_FUNDS
+
+=== 5. Unclaimed payout: detect UNCLAIMED, cancel it, confirm money is released back ===
+   cancelling J55NMQ3JRB3Q4 gc.muqaaxqa@example.com
+   cancel response status: RETURNED
+PASS  cancelled item is no longer UNCLAIMED  -> RETURNED RECEIVER_UNREGISTERED
+PASS  second cancel refused  -> 400 ITEM_ALREADY_CANCELLED
+
+=== 6. Partial failure (PayPal simulation ids; canned responses, NOT a real failed payment) ===
+   GET /v1/payments/payouts/ERRPYO015: batch=DENIED items=FAILED/CLOSED_MARKET
+PASS  ERRPYO015: our rollup flags the failed item as needing attention  -> {"total":1,"delivered":0,"unclaimed":0,"failed":1,"inflight":0,"settled":true,"allDelivered":false,"needsAttention":true}
+   GET /v1/payments/payouts/ERRPYO020: batch=DENIED items=FAILED/RECEIVER_COUNTRY_NOT_ALLOWED
+PASS  ERRPYO020: our rollup flags the failed item as needing attention  -> {"total":1,"delivered":0,"unclaimed":0,"failed":1,"inflight":0,"settled":true,"allDelivered":false,"needsAttention":true}
+   GET /v1/payments/payouts/ERRPYOB004: batch=DENIED items=FAILED/NON_HOLDING_CURRENCY
+PASS  ERRPYOB004: our rollup flags the failed item as needing attention  -> {"total":1,"delivered":0,"unclaimed":0,"failed":1,"inflight":0,"settled":true,"allDelivered":false,"needsAttention":true}
+   GET /payouts-item/ERRPYO041: FAILED CLOSED_MARKET
+PASS  item-level simulation returns a FAILED item with a named reason
+
+=== 7. Invoice with line items tied to the milestone and the inspection record ===
+   invoice INV2-TNFP-HM5H-KDFG-GR9D status DRAFT reference INSP-LIVE lines 5 amount 74.00
+PASS  invoice has 5 milestone line items
+PASS  invoice carries the inspection reference
+
+ALL LIVE CHECKS PASSED

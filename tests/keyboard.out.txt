@@ -1,0 +1,20 @@
+a "Skip to content" outline=solid 3px
+button "The chain1" outline=solid 3px
+button "Without escrow" outline=solid 3px
+button "The case" outline=solid 3px
+button "Ledger" outline=solid 3px
+button "Switch to dark theme" outline=solid 3px
+button "Refresh from PayPal" outline=solid 3px
+button "Reset demo" outline=solid 3px
+button "Release milestone 2" outline=solid 3px
+button "Release milestone 2" outline=solid 3px
+body "Skip to contentMilestone EscrowThe" outline=none 0px
+a "Skip to content" outline=solid 3px
+button "The chain1" outline=solid 3px
+button "Without escrow" outline=solid 3px
+button "The case" outline=solid 3px
+button "Ledger" outline=solid 3px
+drawer open via Enter: true
+Escape closes drawer: true
+200% (640px wide) horizontal overflow px: 0
+reduced-motion animation on a cell: none
